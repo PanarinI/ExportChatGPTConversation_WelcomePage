@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Export ChatGPT</title>
 
   <style>
+
     * {
       margin: 0;
       padding: 0;
@@ -14,48 +16,62 @@
 
     body {
       font-family: Inter, Arial, sans-serif;
+
+      width: 100vw;
       height: 100vh;
+
       overflow: hidden;
+
       background: #f7f7f5;
-      color: #111;
+
       position: relative;
+
+      color: #111;
     }
 
     /* TOP BAR */
 
     .topbar {
       position: absolute;
+
       top: 28px;
       right: 34px;
+
       display: flex;
       align-items: center;
-      gap: 14px;
-      z-index: 5;
+      gap: 16px;
+
+      z-index: 10;
     }
+
+    /* EXPORT BUTTON */
 
     .export-wrapper {
       position: relative;
-      display: flex;
-      align-items: center;
     }
 
     .pulse {
       position: absolute;
+
       inset: -18px;
+
       border-radius: 22px;
-      border: 2px solid rgba(255, 90, 50, 0.16);
-      animation: pulse 2.4s infinite;
+
+      border: 2px solid rgba(255, 106, 48, 0.12);
+
+      animation: pulse 2.8s infinite;
     }
 
     .pulse:nth-child(2) {
-      animation-delay: 0.8s;
+      animation-delay: 0.9s;
     }
 
     .pulse:nth-child(3) {
-      animation-delay: 1.6s;
+      animation-delay: 1.8s;
     }
 
     @keyframes pulse {
+
       0% {
         transform: scale(0.92);
         opacity: 0;
@@ -66,60 +82,158 @@
       }
 
       100% {
-        transform: scale(1.35);
+        transform: scale(1.4);
         opacity: 0;
       }
     }
 
     .export-button {
       position: relative;
+
       display: flex;
       align-items: center;
-      background: white;
+
+      background: #ffffff;
+
       border-radius: 18px;
-      overflow: hidden;
+
       box-shadow:
-        0 2px 8px rgba(0,0,0,0.04),
-        0 10px 30px rgba(0,0,0,0.06);
+        0 2px 10px rgba(0,0,0,0.04),
+        0 8px 30px rgba(0,0,0,0.05);
+
+      overflow: hidden;
+
       z-index: 2;
-      cursor: pointer;
+
       text-decoration: none;
-      color: inherit;
+
+      transition: transform 0.2s ease;
+    }
+
+    .export-button:hover {
+      transform: translateY(-1px);
     }
 
     .export-main {
       display: flex;
       align-items: center;
       gap: 12px;
+
       padding: 18px 24px;
+
       font-size: 22px;
       font-weight: 500;
+
+      color: #111;
     }
+
+    /* ICON */
+
+    .export-icon {
+      position: relative;
+
+      width: 28px;
+      height: 28px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ARROW */
+
+    .export-icon::before {
+      content: "";
+
+      position: absolute;
+
+      width: 10px;
+      height: 10px;
+
+      border-left: 3px solid #ff5a2f;
+      border-bottom: 3px solid #ff5a2f;
+
+      transform:
+        rotate(-45deg)
+        translateY(-4px);
+
+      top: 6px;
+    }
+
+    /* STEM */
+
+    .export-icon::after {
+      content: "";
+
+      position: absolute;
+
+      width: 3px;
+      height: 14px;
+
+      background: #ff5a2f;
+
+      border-radius: 999px;
+
+      top: 2px;
+    }
+
+    /* TRAY */
+
+    .export-tray {
+      position: absolute;
+
+      width: 18px;
+      height: 10px;
+
+      border: 3px solid #ff5a2f;
+      border-top: none;
+
+      border-radius: 0 0 8px 8px;
+
+      bottom: 1px;
+    }
+
+    /* DIVIDER */
 
     .divider {
       width: 1px;
       height: 52px;
-      background: #d7d7d7;
+
+      background: #dddddd;
     }
 
+    /* RIGHT PART */
+
     .export-arrow {
-      width: 54px;
+      width: 56px;
+
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #666;
+
+      color: #777;
+
       font-size: 18px;
     }
 
+    /* SHARE */
+
     .share-button {
+
       background: rgba(0,0,0,0.04);
+
       padding: 18px 26px;
+
       border-radius: 18px;
+
       font-size: 22px;
+
       color: #111;
+
       display: flex;
       align-items: center;
       gap: 12px;
+
       opacity: 0.85;
     }
 
@@ -127,25 +241,35 @@
 
     .center {
       position: absolute;
+
       inset: 0;
+
       display: flex;
       flex-direction: column;
+
       align-items: center;
       justify-content: center;
+
       text-align: center;
+
       z-index: 2;
     }
 
+    /* CONFETTI */
+
     .confetti {
-      font-size: 46px;
-      margin-bottom: 18px;
+      font-size: 48px;
+
+      margin-bottom: 24px;
+
       animation: confettiFade 2.2s forwards;
     }
 
     @keyframes confettiFade {
+
       0% {
         opacity: 0;
-        transform: translateY(10px) scale(0.9);
+        transform: translateY(10px) scale(0.8);
       }
 
       20% {
@@ -162,22 +286,40 @@
       }
     }
 
-    h1 {
-      font-size: 86px;
-      line-height: 0.95;
-      font-weight: 800;
-      letter-spacing: -4px;
-      margin-bottom: 26px;
+    /* TITLE */
 
-      background: linear-gradient(135deg, #ff7a18 0%, #ff5f57 100%);
+    h1 {
+
+      font-size: 88px;
+
+      line-height: 0.95;
+
+      font-weight: 800;
+
+      letter-spacing: -4px;
+
+      margin-bottom: 28px;
+
+      background: linear-gradient(
+        135deg,
+        #ff7a18 0%,
+        #ff5f57 100%
+      );
+
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
+    /* TEXT */
+
     p {
+
       font-size: 32px;
+
       line-height: 1.4;
+
       color: #222;
+
       max-width: 760px;
     }
 
@@ -189,18 +331,27 @@
     /* BOTTOM LINK */
 
     .bottom-link {
+
       position: absolute;
-      bottom: 56px;
+
+      bottom: 54px;
       left: 50%;
+
       transform: translateX(-50%);
-      font-size: 18px;
-      color: #444;
+
       display: flex;
       align-items: center;
       gap: 12px;
+
       text-decoration: none;
-      z-index: 3;
+
+      color: #444;
+
+      font-size: 20px;
+
       transition: opacity 0.2s ease;
+
+      z-index: 5;
     }
 
     .bottom-link:hover {
@@ -215,19 +366,31 @@
     /* ARROW */
 
     .arrow {
+
       position: absolute;
-      width: 520px;
-      height: 520px;
-      right: 210px;
-      top: 250px;
-      z-index: 1;
-      opacity: 0.9;
+
+      width: 560px;
+      height: 560px;
+
+      right: 170px;
+      top: 210px;
+
       pointer-events: none;
+
+      z-index: 1;
     }
 
+    /* MOBILE */
+
     @media (max-width: 900px) {
+
+      .topbar {
+        transform: scale(0.78);
+        transform-origin: top right;
+      }
+
       h1 {
-        font-size: 58px;
+        font-size: 56px;
       }
 
       p {
@@ -235,18 +398,20 @@
         padding: 0 24px;
       }
 
-      .topbar {
-        transform: scale(0.78);
-        transform-origin: top right;
-      }
-
       .arrow {
+
         width: 320px;
         height: 320px;
-        right: 80px;
+
+        right: 70px;
         top: 340px;
       }
+
+      .bottom-link {
+        font-size: 16px;
+      }
     }
+
   </style>
 </head>
 
@@ -256,17 +421,25 @@
 
   <div class="topbar">
 
-    <a class="export-wrapper" href="https://chatgpt.com">
+    <div class="export-wrapper">
 
       <div class="pulse"></div>
       <div class="pulse"></div>
       <div class="pulse"></div>
 
-      <div class="export-button">
+      <a
+        class="export-button"
+        href="https://chatgpt.com"
+      >
 
         <div class="export-main">
-          ⤓
+
+          <div class="export-icon">
+            <div class="export-tray"></div>
+          </div>
+
           <span>Export</span>
+
         </div>
 
         <div class="divider"></div>
@@ -275,8 +448,9 @@
           ▼
         </div>
 
-      </div>
-    </a>
+      </a>
+
+    </div>
 
     <div class="share-button">
       ↥
@@ -287,28 +461,68 @@
 
   <!-- ARROW -->
 
-  <svg class="arrow" viewBox="0 0 600 600" fill="none">
+  <svg
+    class="arrow"
+    viewBox="0 0 700 700"
+    fill="none"
+  >
+
+    <!-- MAIN CURVE -->
+
     <path
-      d="M110 520C250 500 350 400 470 180"
-      stroke="url(#grad)"
+      d="M180 560
+         C340 540,
+           470 420,
+           560 180"
+
+      stroke="url(#arrowGradient)"
       stroke-width="10"
+
       stroke-linecap="round"
     />
 
+    <!-- ARROW HEAD -->
+
     <path
-      d="M438 188L474 170L486 206"
-      stroke="#ff7a18"
+      d="M530 190
+         L562 170
+         L575 205"
+
+      stroke="#ff6a30"
       stroke-width="10"
+
       stroke-linecap="round"
       stroke-linejoin="round"
     />
 
+    <!-- FADE -->
+
     <defs>
-      <linearGradient id="grad" x1="100" y1="520" x2="470" y2="180">
-        <stop stop-color="#ff7a18" stop-opacity="0" />
-        <stop offset="1" stop-color="#ff7a18" />
+
+      <linearGradient
+        id="arrowGradient"
+        x1="180"
+        y1="560"
+        x2="560"
+        y2="180"
+      >
+
+        <stop
+          offset="0%"
+          stop-color="#ff6a30"
+          stop-opacity="0"
+        />
+
+        <stop
+          offset="100%"
+          stop-color="#ff6a30"
+          stop-opacity="1"
+        />
+
       </linearGradient>
+
     </defs>
+
   </svg>
 
   <!-- CENTER -->
@@ -319,10 +533,16 @@
       🎉
     </div>
 
-    <h1>Congratulations!</h1>
+    <h1>
+      Congratulations!
+    </h1>
 
     <p>
-      Your <span class="highlight">Export</span> button is now
+      Your
+      <span class="highlight">
+        Export
+      </span>
+      button is now
       <br />
       active inside ChatGPT
     </p>
@@ -331,9 +551,16 @@
 
   <!-- BOTTOM LINK -->
 
-  <a class="bottom-link" href="https://chatgpt.com">
+  <a
+    class="bottom-link"
+    href="https://chatgpt.com"
+  >
 
-    <svg viewBox="0 0 24 24" fill="none">
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+
       <path
         d="M10 6L4 12L10 18"
         stroke="currentColor"
@@ -341,15 +568,19 @@
         stroke-linecap="round"
         stroke-linejoin="round"
       />
+
       <path
         d="M20 12H5"
         stroke="currentColor"
         stroke-width="2.4"
         stroke-linecap="round"
       />
+
     </svg>
 
-    <span>Return to your ChatGPT conversation</span>
+    <span>
+      Return to your ChatGPT conversation
+    </span>
 
   </a>
 
